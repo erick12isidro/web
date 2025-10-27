@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- Esta página muestra una calculadora interactiva con botones 
+ y un menú desplegable para seleccionar operaciones matemáticas. 
+ El usuario ingresa dos números, elige una operación, y el resultado 
+ se muestra en pantalla. También incluye un botón para limpiar los campos. -->
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora</title>
+    <style>
+        /* Estilo general del cuerpo: fuente moderna y margen amplio */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 40px;
+        }
+
+        /* Estilo para etiquetas: margen y negrita */
+        label {
+            margin: 14px;
+            font-weight: bold;
+        }
+
+        /* Estilo para campos de entrada numérica y de texto */
+        input[type="number"],
+        input[type="text"] {
+            width: 200px;
+            /* Ancho fijo */
+            padding: 6px;
+            /* Espacio interno */
+            margin-bottom: 8px;
+            /* Espacio inferior entre campos */
+        }
+
+        /* Contenedor de botones con diseño flexible */
+        .grupo-botones {
+            display: flex;
+            /* Distribuye los botones en fila */
+            flex-wrap: wrap;
+            /* Permite que se acomoden en varias líneas */
+            gap: 10px;
+            /* Espacio entre botones */
+            margin-top: 10px;
+            /* Espacio superior */
+        }
+
+        /* Estilo general para los botones */
+        button {
+            width: 125px;
+            /* Ancho fijo */
+            padding: 8px 18px;
+            /* Espacio interno vertical y horizontal */
+            font-size: 1em;
+            /* Tamaño de fuente relativo */
+            cursor: pointer;
+            /* Cursor tipo puntero al pasar sobre el botón */
+        }
+
+        /* Estilo específico para el botón "Limpiar" */
+        #limpiar {
+            background-color: gray;
+            /* Fondo gris */
+            color: black;
+            /* Texto negro */
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Título principal de la calculadora -->
+    <h2>Calculadora con botones</h2>
+
+    <!-- Campo para el primer número -->
+    <div class="grupo-formulario">
+    <label for="number1">Número 1</label>
+    <input type="number" id="numero1">
+    </div>
+
+    <!-- Campo para el segundo número -->
+    <div class="grupo-formulario">
+        <label for="number2">Número 2</label>
+        <input type="number" id="numero2">
+    </div>
+
+    <!-- Campo para mostrar el resultado, solo lectura -->
+    <div class="grupo-formulario">
+        <label for="resultado">Resultado</label>
+        <input type="text" id="resultado" readonly>
+    </div>
+
+    <!-- Menú desplegable para elegir la operación -->
+    <div class="menu">
+        <label for="operacion">Operaciones</label>
+        <select id="operacion">
+            <option value="sumar">Sumar</option>
+            <option value="restar">Restar</option>
+            <option value="dividir">Dividir</option>
+            <option value="multiplicar">Multiplicación</option>
+            <option value="residuo">Residuo</option>
+            <option value="potencia">Potencia</option>
+            <option value="raizdex">Raíz de x</option>
+        </select>
+    </div>
+
+    <!-- Botones para calcular y limpiar -->
+    <div class="grupo-botones">
+        <button onclick="calcular()">Calcular</button>
+        <button id="limpiar" onclick="limpiar()">Limpiar</button>
+    </div>
+
+    <script>
+        // Al cargar la página, se enfoca automáticamente el campo del primer número
+        window.onload = function () {
+            document.getElementById('numero1').focus();
+        }
+
+        // Función que realiza el cálculo según la operación seleccionada
+        function calcular() {
+            // Obtiene los valores ingresados y los convierte a números decimales
+            const num1 = parseFloat(document.getElementById('numero1').value);
+            const num2 = parseFloat(document.getElementById('numero2').value);
+            const operacion = document.getElementById('operacion').value;
+            let resultado;
+
+            // Verifica si los valores son válidos
+            if (isNaN(num1) || isNaN(num2)) {
+                resultado = "Ingresa números válidos";
+            } else {
+                // Ejecuta la operación seleccionada
+                switch (operacion) {
+                    case 'sumar':
+                        resultado = num1 + num2;
+                        break;
+                    case 'restar':
+                        resultado = num1 - num2;
+                        break;
+                    case 'dividir':
+                        resultado = num2 === 0 ? "No se puede dividir por cero" : num1 / num2;
+                        break;
+                    case 'multiplicar':
+                        resultado = num1 * num2;
+                        break;
+                    case 'residuo':
+                        resultado = num1 % num2;
+                        break;
+                    case 'potencia':
+                        // Math.pow(base, exponente) calcula la potencia de un número.
+                        // Devuelve el resultado de elevar "base" a la "exponente".
+                        // Por ejemplo: Math.pow(2, 3) devuelve 8 porque 2³ = 8.
+
+                        resultado = Math.pow(num1, num2);
+                        break;
+                    case 'raizdex':
+                        resultado = Math.pow(num1, 1 / num2); // Raíz enésima de num1
+                        break;
+                    default:
+                        resultado = "Operación no válida";
+                }
+            }
+
+            // Muestra el resultado en el campo correspondiente
+            document.getElementById('resultado').value = resultado;
+        }
+
+        // Función que limpia los campos y vuelve a enfocar el primero
+        function limpiar() {
+            document.getElementById('numero1').value = '';
+            document.getElementById('numero2').value = '';
+            document.getElementById('resultado').value = '';
+            document.getElementById('numero1').focus();
+        }
+        document.getElementById('operacion').selectedIndex = 0;
+        
+    </script>
+</body>
+
+</html>

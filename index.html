@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en-MX">
+    <!--Isidro Vazquez Erick Hector -->
+    <!--20/10/2025-->
+    <!--El propósito principal de este código es definir la apariencia y los enlaces de interacción para que el usuario pueda ingresar una secuencia de números y operaciones
+    este archivo es el esqueleto de la calculadora, delegando toda la funcionalidad matemática y lógica de visualización al archivo script.js-->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora</title>
+
+    <link rel="stylesheet" href="estilos.css"> <!--Este archivo (estilos.css) contiene todas las reglas CSS que dan formato a los elementos de la calculadora (colores, tamaños, tipografía, disposición con flexbox o grid, etc.), incluidas las clases boton, boton-especial, boton-operador, y boton-cero-->
+</head>
+<body>
+    <div class="calculadora">
+        <div class="pantalla" id="pantalla">0</div>
+        <div class="botones">
+            
+
+
+              <!--Fila 1-->
+            <button class="boton boton-especial" onclick="Limpiar()">C</button>     <!--Función de limpieza total.Resetea la pantalla y el estado interno de la calculadora (borra todo el cálculo actual)-->
+            <button class="boton boton-especial" onclick="borrar()">⌫</button>     <!--Función de borrado parcial. Elimina el último dígito o carácter ingresado en la pantalla de la calculadora (equivalente a la tecla de retroceso)-->
+            <button class="boton boton-especial" onclick="agregarOperador('%')">%</button>  <!--Agrega el símbolo de porcentaje al input actual, permitiendo cálculos de porcentaje. Se utiliza la función general para agregar números/símbolos-->
+            <button class="boton boton-operador" onclick="agregarOperador('/')">÷</button>  <!--Agrega el operador de división (/) a la expresión matemática en la pantalla. Esta función se encarga de la lógica para manejar operadores-->
+
+            <!--Fila 2-->
+            <button class="boton" onclick="agregarNumero('7')">7</button>  <!--Esta función se encarga de añadir el dígito a la expresión o número actual que se muestra en la pantalla de la calculadora-->
+            <button class="boton" onclick="agregarNumero('8')">8</button>  <!--Agrega el dígito 8 a la pantalla de la calculadora.Estilo base para botones numéricos-->
+            <button class="boton" onclick="agregarNumero('9')">9</button>  <!--Agrega el dígito 9 a la pantalla de la calculadora.Estilo base para botones numéricos-->
+            <button class="boton boton-operador" onclick="agregarOperador('*')">×</button>  <!--Agrega el operador de multiplicación (*) a la expresión.Esta función maneja la lógica para insertar el operador en la cadena de cálculo-->
+
+            <!--Fila 3-->
+            <button class="boton" onclick="agregarNumero('4')">4</button>  <!--Se encarga de añadir el dígito a la expresión o número actual que se está construyendo en la pantalla de la calculadora-->
+            <button class="boton" onclick="agregarNumero('5')">5</button>  <!--Agrega el dígito 5 a la pantalla de la calculadora.Estilo base para botones numéricos-->
+            <button class="boton" onclick="agregarNumero('6')">6</button>  <!--Agrega el dígito 6 a la pantalla de la calculadora.Estilo base para botones numéricos-->
+            <button class="boton boton-operador" onclick="agregarOperador('-')">–</button>  <!--Agrega el operador de resta (-) a la expresión. Esta función maneja la lógica para insertar el operador de resta en la cadena de cálculo-->
+
+            <!--Fila 4-->
+            <button class="boton" onclick="agregarNumero('1')">1</button>  <!--Agrega el dígito 1 a la pantalla de la calculadora.Estilo base para botones numéricos-->
+            <button class="boton" onclick="agregarNumero('2')">2</button>  <!--Agrega el dígito 2 a la pantalla de la calculadora.Estilo base para botones numéricos-->
+            <button class="boton" onclick="agregarNumero('3')">3</button>  <!--Agrega el dígito 3 a la pantalla de la calculadora.Estilo base para botones numéricos-->
+            <button class="boton boton-operador" onclick="agregarOperador('+')">+</button>  <!--Esta función inserta el operador de suma en la cadena de cálculo, aplicando la lógica necesaria para manejar la secuencia correcta de operadores dentro de la expresión-->
+
+            <!--Fila 5-->
+            <button class="boton boton-cero" onclick="agregarNumero('0')">0</button>  <!--Agrega el dígito 0 a la pantalla de la calculadora-->
+            <button class="boton" onclick="agregarDecimal()">.</button>  <!--Estilo base para el botón-->
+            <button class="boton boton-cero" onclick="calcular()">=</button>  <!--Ejecuta la operación. Procesa la expresión matemática actual en la pantalla y muestra el resultado final-->
+            
+        </div>
+    </div>
+
+    <script src="script.js"></script> <!--Especifica la ruta del archivo JavaScript externo llamado.Este archivo script.js contiene toda la lógica de las funciones (Limpiar(), agregarNumero(), calcular(), etc.) definidas en los atributos onclick de los botones-->
+</body>
+</html>

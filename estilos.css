@@ -1,0 +1,143 @@
+/*El margin: 0, padding: 0 y box-sizing: border-box  es para un control predecible del diseño*/
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; 
+}
+
+/*Definimos la fuente (Arial),con un color de fondo oscuro (#0a0a0a) para la página, y utiliza Flexbox (display: flex, justify-content: center, align-items: center)
+para centrar el componente de la calculadora vertical y horizontalmente en la ventana (min-height: 100vh)*/
+body{ 
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #0a0a0a;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.calculadora{
+    background-color: #b3aaaa; /*Color de fondo  para el cuerpo de la calculadora*/
+    border-radius: 20px; /*Bordes redondeados para la apariencia del dispositivo*/
+    padding: 20px; /*Espacio interno de los alrededor del teclado */
+    box-shadow: 0 10px 50px rgba(1, 17, 241, 0.5); /* Una sombra sutil que le da un efecto de profundidad*/
+    width: 100%; /*Asegura que la calculadora ocupe el 100% del ancho disponible*/
+    max-width: 320px; /*hasta un máximo de 320px*/
+}
+
+.pantalla{
+    background-color: #000; /*Fondo negro (#000)*/
+    color: #ffffff; /*texto blanco (#fff)*/
+    font-size: 28px; /*Fuente grande de 28px*/
+    font-weight: bold; /*en negrita */
+    text-align: right; /*Alinea el texto a la derecha, estándar para calculadoras*/
+    padding: 20px; /*Espaciado interno (20px) y un margen inferior para separarla de los botones*/
+    margin-bottom: 20px; 
+    border-radius: 10px; 
+    min-height: 80px; /*Altura mínima de 80px*/
+    
+    /*Utiliza Flexbox para alinear el contenido verticalmente (align-items: center) y horizontalmente (justify-content: flex-end),
+     asegurando que el resultado se mantenga pegado al borde derecho e inferior del área de la pantalla*/
+    display: flex; 
+    align-items: center; 
+    justify-content: flex-end; 
+
+    /*Maneja el desbordamiento de texto: rompe palabras (break-all) y oculta el contenido que exceda la caja (hidden)*/
+    word-wrap: break-word; 
+    word-break: break-all; 
+    overflow: hidden; 
+
+}
+
+.botones{ /*Contenedor de la cuadrícula de botones*/
+    display: grid; /*Activa el sistema de cuadrícula para una disposición de filas y columnas*/
+    grid-template-columns: repeat(4,1fr); /*Define 4 columnas de igual ancho (1fr) para la disposición estándar del teclado (4 botones por fila)*/
+    gap: 10px; /*Espacio de 10px entre todos los botones (tanto horizontal como vertical)*/
+}
+
+.boton{ /*Define la apariencia estándar para todos los botones*/
+    background-color: #0a0a0a; /*Color de fondo de los botones (excepto operadores/especiales).*/
+    color: #ffffff; /*Color del texto del botón (color de los numero)*/ 
+    border: none; /*Sin borde*/
+    border-radius: 10px; /*bordes redondeados*/
+    font-size: 20px; /*Tamaño*/
+    font-weight: 500; /*grosor de la fuente*/
+    padding: 20px; /*Espacio interno para hacer los botones más grandes*/
+    cursor: pointer; /*Cambia el cursor para indicar que es interactivo*/
+    transition: all 0.2s ease; /*Transición suave de 0.2 segundos para efectos :hover y :active*/
+    user-select: none; /*Evita que el texto del botón se pueda seleccionar al hacer clic*/
+    
+}
+
+/*Al pasar el ratón: Cambia ligeramente el color de fondo y reduce el tamaño del botón para dar una sensación de interactividad*/
+.boton:hover { 
+    background-color: #b3cbd4;
+    transform: scale(0.98);
+}
+
+/*Al hacer clic: Reduce el tamaño del botón aún más, simulando el hundimiento de una tecla*/
+.boton:active {
+    transform: scale(0.95);
+}
+
+/*Fondo azul brillante para los botones de operadores (÷, *, -, +)*/
+.boton-operador {
+    background-color: #1900ff;
+}
+
+/*Aclara el azul de los operadores al pasar el ratón*/
+.boton-operador:hover {
+    background-color: #4087f0;
+}
+
+/*Fondo azul brillante para las funciones especiales (C, ☒ (borrar), %).*/
+*.boton-especial { 
+    background-color: #1900ff;
+}
+
+/*Aclara el azul de los especial al pasar el ratón.*/
+.boton-especial:hover {
+    background-color: #4087f0;
+}
+
+/*Normalmente se usa para aplicar grid-column: span 2; en el 0 y el =, para que ocupen el ancho de dos columnas. Pero si le pongo 2 se desforma*/
+.boton-cero {
+    grid-column: span 1;
+}
+
+/* Animacion de pulación*/
+@keyframes pilsar {
+    0%{
+        transform: scale(1); /*Estado inicial (tamaño normal)*/
+    }
+    50%{
+        transform: scale(0.95); /*En el punto medio, el botón se reduce un 5% (se "hunde")*/
+    }
+    100%{
+        transform: scale(1); /*Retorna al estado normal (se "levanta").*/
+    }
+}
+
+/*La clase .pulsar aplica esta animación a cualquier elemento al que se le asigne, con una duración rápida de 0.1s y una curva de aceleración y desaceleración suave (ease-in-out)*/
+.pulsar {
+    animation: pulsar 0.1s ease-in-out;
+
+}
+
+/*Reponsive*/
+@media (max-width: 400px) {
+    .calculadora {  
+        padding: 15px; /*Reduce el margen interno de la calculadora.*/
+    }
+    .boton{
+        padding: 15px;  /*Reduce el tamaño de los botones para que quepan mejor*/
+        font-size: 18px;  /*Reduce el tamaño de la fuente en los botones*/
+    }
+
+    .pantalla{
+        font-size: 24px;  /*Reduce el tamaño de la fuente en la pantalla*/
+        padding: 15px;  /*Reduce el margen interno de la pantalla*/
+        min-height: 60px;  /*Reduce la altura mínima de la pantalla para ahorrar espacio*/
+    }
+}
